@@ -44,6 +44,16 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // });
 /////////////////////////
 // Routes
+app.get("/", function(req, res) {
+  db.Article.find({}),function(err, res) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.json(res);
+    }
+  };
+});
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
