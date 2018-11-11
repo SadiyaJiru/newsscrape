@@ -26,9 +26,8 @@ app.use(express.json());
 app.use(express.static("public"));
  
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI||"mongodb://localhost/homework";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/homework";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-
 //Connecting to Heroku
 // if(process.env.MONGODB_URI){
 //   mongoose.connect(process.env.MONGODB_URI);
@@ -45,12 +44,12 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 /////////////////////////
 // Routes
 app.get("/", function(req, res) {
-  db.Article.find({}),function(err, res) {
+  db.Article.find({}),function(err, result) {
     if (err) {
       console.log(err);
     }
     else {
-      res.json(res);
+      res.json(result);
     }
   };
 });
@@ -143,6 +142,6 @@ app.post("/articles/:id", function(req, res) {
 });
 
 // Start the server
-app.listen(process.env.PORT || 8000, function() {
+app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
 });
