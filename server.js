@@ -1,17 +1,15 @@
 var express = require("express");
-var logger = require("morgan");
 var mongoose = require("mongoose");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-var axios = require("axios");
+var logger = require("morgan");
+var request = require ("request");
 var cheerio = require("cheerio");
+var axios = require("axios");
 
-// Require all models
+
+
 var db = require("./models");
 
-var PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // Initialize Express
 var app = express();
@@ -22,13 +20,29 @@ var app = express();
 app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
+// Require all models
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
-
+ 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/homework", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI||"mongodb://localhost/homework";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
+//Connecting to Heroku
+// if(process.env.MONGODB_URI){
+//   mongoose.connect(process.env.MONGODB_URI);
+// }else{
+//   mongoose.connect(MONGODB_URI);
+// }
+// var db = mongoose.connection;
+// db.on("error", function(err){
+//   console.log("Mongoose Error: ", err)
+// });
+// db.once("open", function(){
+//   console.log("Mongoose Connection Successful.");
+// });
+/////////////////////////
 // Routes
 
 // A GET route for scraping the echoJS website
@@ -119,6 +133,6 @@ app.post("/articles/:id", function(req, res) {
 });
 
 // Start the server
-app.listen(PORT, function() {
+app.listen(process.env.PORT || 8000, function() {
   console.log("App running on port " + PORT + "!");
 });
