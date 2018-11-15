@@ -4,24 +4,12 @@ var logger = require("morgan");
 var request = require ("request");
 var cheerio = require("cheerio");
 var axios = require("axios");
-var exphbs = require("express-handlebars");
-
-
-
 var db = require("./models");
 
 const PORT = process.env.PORT || 8000;
 // Initialize Express
 var app = express();
 
-// Set Handlebars as the default templating engine.
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-
-
-
-// Configure middleware
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -36,8 +24,7 @@ app.use(express.static("public"));
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/homework";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-/////////////////////////
-// Routes
+//////////Routes///////////////
 app.get("/", function(req, res) {
   db.Article.find({}),function(err, result) {
     if (err) {
@@ -83,8 +70,9 @@ app.get("/scrape", function(req, res) {
         });
     });
 
-    // If we were able to successfully scrape and save an Article, send a message to the client
-    // res.send("Scrape Complete");
+    //  res.send("Scrape Complete");
+    //Render the home page if the scrape is done
+
     res.redirect("/");
   });
 });
@@ -94,7 +82,7 @@ app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
   db.Article.find({})
     .then(function(dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
+//If all articles are found, send the response to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
@@ -103,7 +91,7 @@ app.get("/articles", function(req, res) {
     });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// Route for finding Article by id, populate it with the note
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
