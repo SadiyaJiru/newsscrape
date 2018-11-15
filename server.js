@@ -4,15 +4,22 @@ var logger = require("morgan");
 var request = require ("request");
 var cheerio = require("cheerio");
 var axios = require("axios");
+var exphbs = require("express-handlebars");
 
 
 
 var db = require("./models");
 
 const PORT = process.env.PORT || 8000;
-
 // Initialize Express
 var app = express();
+
+// Set Handlebars as the default templating engine.
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
+
+
+
 
 // Configure middleware
 
@@ -28,19 +35,7 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/homework";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-//Connecting to Heroku
-// if(process.env.MONGODB_URI){
-//   mongoose.connect(process.env.MONGODB_URI);
-// }else{
-//   mongoose.connect(MONGODB_URI);
-// }
-// var db = mongoose.connection;
-// db.on("error", function(err){
-//   console.log("Mongoose Error: ", err)
-// });
-// db.once("open", function(){
-//   console.log("Mongoose Connection Successful.");
-// });
+
 /////////////////////////
 // Routes
 app.get("/", function(req, res) {
@@ -79,6 +74,8 @@ app.get("/scrape", function(req, res) {
         .then(function(dbArticle) {
           // View the added result in the console
           console.log(dbArticle);
+        
+          
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
@@ -87,7 +84,8 @@ app.get("/scrape", function(req, res) {
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Scrape Complete");
+    // res.send("Scrape Complete");
+    res.redirect("/");
   });
 });
 

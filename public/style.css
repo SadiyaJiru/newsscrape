@@ -1,3 +1,61 @@
-h1{
-    color: pink;
+body { background: #4b6cb7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+
+}
+#wrapper {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+          padding-top: 5%;
+          
+      }
+
+      h1, h2, form{
+          padding: 1%;
+          text-align: center;
+          color: blue;
+          font-family: 'Fjalla One', sans-serif;
+
+            }
+            h2{
+                color: red;
+            }
+      .paper{
+          color: black;
+      }
+#articles {
+          padding: 2%;
+  display: inline-block;
+  overflow: auto;
+  width: 60%;
+  height: 700px;
+}
+#notes {
+  float: right;
+  width: 30%;
+  padding: 2%;
+  
+}
+#savenote{
+    background-color: 	#24A2B8;
+    margin: 2%;
+    padding: 2%;
+    color: white;
+    size: 50px;
+}
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: wheat;
+ 
+}
+input {
+  height: 36px;
+  font-size: 24px;
+}
+textarea {
+  height: 200px;
+  font-size: 18px;
 }
