@@ -10,9 +10,7 @@ axios.get("http://www.mprnews.org/").then(function( response) {
 ### MPRNews Scraper is deployed to Heroku
 [Click To Go To Deployed Site](https://mprscraper.herokuapp.com)
 
-
-<img width="1193" alt="screen shot 2018-11-14 at 9 09 34 pm" src="https://user-images.githubusercontent.com/39322545/48527736-c16de580-e851-11e8-862a-3f5687697dff.png">
-
+<img width="1197" alt="screen shot 2018-11-14 at 9 19 45 pm" src="https://user-images.githubusercontent.com/39322545/48528133-40175280-e853-11e8-9e78-99b314995fbb.png">
 
 
 
